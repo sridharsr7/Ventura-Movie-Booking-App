@@ -38,10 +38,10 @@ const PartnerAnalytics = () => {
             setLoading(true);
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const statsRes = await axios.get('http://localhost:5000/api/partner/stats', config);
+                const statsRes = await axios.get('/api/partner/stats', config);
                 setScreenStats(statsRes.data?.screenStats || []);
 
-                let url = `http://localhost:5000/api/partner/analytics?period=${period}`;
+                let url = `/api/partner/analytics?period=${period}`;
                 if (period === 'custom') {
                     url += `&startDate=${customStart}&endDate=${customEnd}`;
                 }

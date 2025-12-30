@@ -26,7 +26,7 @@ const AdminAnalytics = () => {
 
     const fetchAllMovies = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/movies');
+            const res = await axios.get('/api/movies');
             setAllMovies(res.data);
         } catch (err) {
             console.error('Error fetching all movies:', err);
@@ -38,7 +38,7 @@ const AdminAnalytics = () => {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            const res = await axios.get('http://localhost:5000/api/admin/partners-analytics', config);
+            const res = await axios.get('/api/admin/partners-analytics', config);
             setPartnersAnalytics(res.data);
         } catch (err) {
             console.error('Error fetching analytics:', err);
@@ -63,7 +63,7 @@ const AdminAnalytics = () => {
         e.preventDefault();
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.put(`http://localhost:5000/api/admin/screens/${editData.screenId}/showtimes/${editData.showtimeId}`, {
+            await axios.put(`/api/admin/screens/${editData.screenId}/showtimes/${editData.showtimeId}`, {
                 time: editData.time,
                 date: editData.date,
                 movieId: editData.movieId

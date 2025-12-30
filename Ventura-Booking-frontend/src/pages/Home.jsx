@@ -47,7 +47,7 @@ const Home = () => {
     useEffect(() => {
         const fetchMoviesByCity = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/movies?city=${selectedCity}`);
+                const res = await axios.get(`/api/movies?city=${selectedCity}`);
                 setMovies(res.data);
             } catch (err) {
                 console.error('Error fetching movies:', err);
@@ -61,7 +61,7 @@ const Home = () => {
     useEffect(() => {
         const fetchUpcomingMovies = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/movies?status=upcoming');
+                const res = await axios.get('/api/movies?status=upcoming');
                 setUpcomingMovies(res.data);
             } catch (err) {
                 console.error('Error fetching upcoming movies:', err);
@@ -143,7 +143,7 @@ const Home = () => {
                             >
                                 <div className="aspect-[2/3] w-full overflow-hidden rounded-xl">
                                     <img
-                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                         alt={movie.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -189,7 +189,7 @@ const Home = () => {
                             >
                                 <div className="aspect-[2/3] w-full overflow-hidden rounded-xl">
                                     <img
-                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                         alt={movie.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

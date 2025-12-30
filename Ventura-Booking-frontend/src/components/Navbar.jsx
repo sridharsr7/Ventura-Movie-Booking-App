@@ -36,7 +36,7 @@ const Navbar = () => {
             }
 
             try {
-                const res = await axios.get(`http://localhost:5000/api/movies?city=${selectedCity}`);
+                const res = await axios.get(`/api/movies?city=${selectedCity}`);
                 const allMovies = res.data;
 
                 const filtered = allMovies.filter(movie =>
@@ -123,7 +123,7 @@ const Navbar = () => {
                                         className="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors border-b border-gray-800 last:border-0"
                                     >
                                         <img
-                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                             alt={movie.title}
                                             className="w-10 h-14 object-cover rounded-md"
                                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/40x56?text=No+Img'; }}

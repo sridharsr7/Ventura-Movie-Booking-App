@@ -59,7 +59,7 @@ const BillBookingPage = () => {
                 totalAmount: finalTotal
             };
 
-            const res = await axios.post('http://localhost:5000/api/bookings', bookingData, {
+            const res = await axios.post('/api/bookings', bookingData, {
                 headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
             });
 

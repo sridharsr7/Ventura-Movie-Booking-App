@@ -54,7 +54,7 @@ const AdminPartners = () => {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            const res = await axios.get('http://localhost:5000/api/admin/partners', config);
+            const res = await axios.get('/api/admin/partners', config);
             setPartners(res.data);
         } catch (err) {
             console.error('Error fetching partners:', err);
@@ -80,10 +80,10 @@ const AdminPartners = () => {
             };
 
             if (editingPartnerId) {
-                await axios.put(`http://localhost:5000/api/admin/partners/${editingPartnerId}`, partnerData, config);
+                await axios.put(`/api/admin/partners/${editingPartnerId}`, partnerData, config);
                 setPartnerMessage('Partner updated successfully!');
             } else {
-                await axios.post('http://localhost:5000/api/admin/partners', partnerData, config);
+                await axios.post('/api/admin/partners', partnerData, config);
                 setPartnerMessage('Partner created successfully!');
             }
 
@@ -143,7 +143,7 @@ const AdminPartners = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 };
-                await axios.delete(`http://localhost:5000/api/admin/partners/${id}`, config);
+                await axios.delete(`/api/admin/partners/${id}`, config);
                 fetchPartners();
             } catch (err) {
                 console.error('Error deleting partner:', err);

@@ -140,7 +140,7 @@ const AuthProvider = ({ children }) => {
             headers: { Authorization: `Bearer ${token}` },
             timeout: 5000
           };
-          const res = await axios.get('http://localhost:5000/api/auth/me', config);
+          const res = await axios.get('/api/auth/me', config);
           setUser(res.data);
         } catch (error) {
           console.error('Failed to fetch user', error);

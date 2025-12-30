@@ -28,7 +28,7 @@ const PartnerReport = () => {
         }
 
         try {
-            await axios.post('http://localhost:5000/api/partner/report', formData, {
+            await axios.post('/api/partner/report', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'

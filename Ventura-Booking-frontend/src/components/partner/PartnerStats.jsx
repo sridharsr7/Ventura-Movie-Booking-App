@@ -19,10 +19,10 @@ const PartnerStats = () => {
         const fetchStats = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const moviesRes = await axios.get('http://localhost:5000/api/partner/my-movies', config);
-                const screensRes = await axios.get('http://localhost:5000/api/partner/screens', config);
+                const moviesRes = await axios.get('/api/partner/my-movies', config);
+                const screensRes = await axios.get('/api/partner/screens', config);
 
-                let statsUrl = `http://localhost:5000/api/partner/stats?period=${period}`;
+                let statsUrl = `/api/partner/stats?period=${period}`;
                 if (period === 'custom') {
                     statsUrl += `&startDate=${customStart}&endDate=${customEnd}`;
                 }

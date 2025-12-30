@@ -18,7 +18,7 @@ const PartnerPerformance = () => {
         const fetchPerformance = async () => {
             setLoading(true);
             try {
-                let url = `http://localhost:5000/api/admin/performance?period=${period}&sortBy=${sortBy}&city=${selectedCity}`;
+                let url = `/api/admin/performance?period=${period}&sortBy=${sortBy}&city=${selectedCity}`;
                 if (period === 'custom') {
                     url += `&startDate=${customStart}&endDate=${customEnd}`;
                 }

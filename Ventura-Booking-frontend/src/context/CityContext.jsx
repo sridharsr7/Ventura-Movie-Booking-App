@@ -10,7 +10,7 @@ export const CityProvider = ({ children }) => {
     useEffect(() => {
         const fetchCities = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/movies/locations');
+                const res = await axios.get('/api/movies/locations');
                 setCities(res.data);
             } catch (err) {
                 console.error('Error fetching cities:', err);

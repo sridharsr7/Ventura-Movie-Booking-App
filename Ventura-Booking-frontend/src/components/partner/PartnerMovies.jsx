@@ -19,7 +19,7 @@ const PartnerMovies = () => {
     const fetchAvailableMovies = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get('http://localhost:5000/api/partner/movies', config);
+            const res = await axios.get('/api/partner/movies', config);
             setMovies(res.data);
         } catch (err) {
             console.error('Error fetching movies:', err);
@@ -29,7 +29,7 @@ const PartnerMovies = () => {
     const fetchMyMovies = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get('http://localhost:5000/api/partner/my-movies', config);
+            const res = await axios.get('/api/partner/my-movies', config);
             setMyMovies(res.data);
         } catch (err) {
             console.error('Error fetching my movies:', err);
@@ -39,7 +39,7 @@ const PartnerMovies = () => {
     const handleApproveMovie = async (movieId) => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.post(`http://localhost:5000/api/partner/movies/${movieId}/approve`, {}, config);
+            await axios.post(`/api/partner/movies/${movieId}/approve`, {}, config);
             fetchAvailableMovies();
             alert('Movie Approved!');
         } catch (err) {
@@ -51,7 +51,7 @@ const PartnerMovies = () => {
     const handleRejectMovie = async (movieId) => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            await axios.post(`http://localhost:5000/api/partner/movies/${movieId}/reject`, {}, config);
+            await axios.post(`/api/partner/movies/${movieId}/reject`, {}, config);
             if (activeTab === 'marketplace') fetchAvailableMovies();
             if (activeTab === 'my-movies') fetchMyMovies();
             alert('Movie Rejected/Removed!');
@@ -92,7 +92,7 @@ const PartnerMovies = () => {
                                     <div key={movie._id} className="relative rounded-xl overflow-hidden shadow-md bg-gray-50">
                                         <div className="aspect-[2/3] bg-gray-200">
                                             <img
-                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                                 alt={movie.title}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -141,7 +141,7 @@ const PartnerMovies = () => {
                                         </div>
                                         <div className="aspect-[2/3] bg-gray-200">
                                             <img
-                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                                 alt={movie.title}
                                                 className="w-full h-full object-cover grayscale-[0.2]"
                                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -175,7 +175,7 @@ const PartnerMovies = () => {
                                 <div key={movie._id} className="relative rounded-xl overflow-hidden shadow-md bg-gray-50">
                                     <div className="aspect-[2/3] bg-gray-200">
                                         <img
-                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                             alt={movie.title}
                                             className="w-full h-full object-cover"
                                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

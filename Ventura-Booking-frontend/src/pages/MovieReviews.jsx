@@ -12,10 +12,10 @@ const MovieReviews = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const movieRes = await axios.get(`http://localhost:5000/api/movies/${id}`);
+                const movieRes = await axios.get(`/api/movies/${id}`);
                 setMovie(movieRes.data);
 
-                const reviewsRes = await axios.get(`http://localhost:5000/api/movies/${id}/reviews`);
+                const reviewsRes = await axios.get(`/api/movies/${id}/reviews`);
                 setReviews(reviewsRes.data);
             } catch (error) {
                 console.error("Error fetching data:", error);

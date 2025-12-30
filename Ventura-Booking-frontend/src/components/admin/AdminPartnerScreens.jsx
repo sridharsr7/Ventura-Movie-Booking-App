@@ -64,7 +64,7 @@ const AdminPartnerScreens = ({ partnerId }) => {
     const fetchScreens = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get(`http://localhost:5000/api/admin/partners/${partnerId}/screens`, config);
+            const res = await axios.get(`/api/admin/partners/${partnerId}/screens`, config);
 
             const screensData = res.data.map(screen => {
                 if (screen.showtimes && screen.showtimes.length > 0) {
@@ -92,7 +92,7 @@ const AdminPartnerScreens = ({ partnerId }) => {
     const fetchPartnerMovies = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get(`http://localhost:5000/api/admin/partners/${partnerId}/movies`, config);
+            const res = await axios.get(`/api/admin/partners/${partnerId}/movies`, config);
             setMyMovies(res.data);
         } catch (err) {
             console.error('Error fetching partner movies:', err);
@@ -109,10 +109,10 @@ const AdminPartnerScreens = ({ partnerId }) => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
             if (editingScreenId) {
-                await axios.put(`http://localhost:5000/api/admin/screens/${editingScreenId}`, screenData, config);
+                await axios.put(`/api/admin/screens/${editingScreenId}`, screenData, config);
                 alert('Screen Updated Successfully');
             } else {
-                await axios.post(`http://localhost:5000/api/admin/partners/${partnerId}/screens`, screenData, config);
+                await axios.post(`/api/admin/partners/${partnerId}/screens`, screenData, config);
                 alert('Screen Added Successfully');
             }
 
@@ -145,7 +145,7 @@ const AdminPartnerScreens = ({ partnerId }) => {
         if (window.confirm('Are you sure you want to delete this screen?')) {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                await axios.delete(`http://localhost:5000/api/admin/screens/${id}`, config);
+                await axios.delete(`/api/admin/screens/${id}`, config);
                 fetchScreens();
             } catch (err) {
                 console.error(err);
@@ -196,7 +196,7 @@ const AdminPartnerScreens = ({ partnerId }) => {
             const gapSeatsCount = specialSeats.filter(s => s.status === 'gap').length;
             const newSeatCapacity = totalSlots - gapSeatsCount;
 
-            await axios.put(`http://localhost:5000/api/admin/screens/${managingScreen._id}`, {
+            await axios.put(`/api/admin/screens/${managingScreen._id}`, {
                 specialSeats: specialSeats,
                 rowPrices: rowPrices,
                 rowNames: rowNames,
@@ -245,10 +245,10 @@ const AdminPartnerScreens = ({ partnerId }) => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
             if (editingShowtimeId) {
-                await axios.put(`http://localhost:5000/api/admin/screens/${targetScreenId}/showtimes/${editingShowtimeId}`, showtimeData, config);
+                await axios.put(`/api/admin/screens/${targetScreenId}/showtimes/${editingShowtimeId}`, showtimeData, config);
                 alert('Showtime updated!');
             } else {
-                await axios.post(`http://localhost:5000/api/admin/screens/${targetScreenId}/showtimes`, showtimeData, config);
+                await axios.post(`/api/admin/screens/${targetScreenId}/showtimes`, showtimeData, config);
                 alert('Showtime added!');
             }
 
@@ -276,7 +276,7 @@ const AdminPartnerScreens = ({ partnerId }) => {
         if (window.confirm('Delete this showtime?')) {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                await axios.delete(`http://localhost:5000/api/admin/screens/${screenId}/showtimes/${showtimeId}`, config);
+                await axios.delete(`/api/admin/screens/${screenId}/showtimes/${showtimeId}`, config);
                 fetchScreens();
             } catch (err) {
                 console.error(err);

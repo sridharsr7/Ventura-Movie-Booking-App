@@ -20,8 +20,8 @@ const BookingPage = () => {
         const fetchData = async () => {
             try {
                 const [screenRes, bookedRes] = await Promise.all([
-                    axios.get(`http://localhost:5000/api/partner/screens/${screenId}`),
-                    axios.get(`http://localhost:5000/api/bookings/showtime/${screenId}/${showtimeId}`)
+                    axios.get(`/api/partner/screens/${screenId}`),
+                    axios.get(`/api/bookings/showtime/${screenId}/${showtimeId}`)
                 ]);
 
                 setScreen(screenRes.data);

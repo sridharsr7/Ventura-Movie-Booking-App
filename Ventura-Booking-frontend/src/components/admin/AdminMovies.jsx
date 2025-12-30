@@ -32,7 +32,7 @@ const AdminMovies = () => {
 
     const fetchMovies = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/movies?all=true');
+            const res = await axios.get('/api/movies?all=true');
             setMovies(res.data);
         } catch (err) {
             console.error('Error fetching movies:', err);
@@ -148,10 +148,10 @@ const AdminMovies = () => {
             };
 
             if (editingMovieId) {
-                await axios.put(`http://localhost:5000/api/movies/${editingMovieId}`, formData, config);
+                await axios.put(`/api/movies/${editingMovieId}`, formData, config);
                 alert('Movie updated successfully');
             } else {
-                await axios.post('http://localhost:5000/api/movies', formData, config);
+                await axios.post('/api/movies', formData, config);
                 alert('Movie added successfully');
             }
 
@@ -195,7 +195,7 @@ const AdminMovies = () => {
                 const config = {
                     headers: { Authorization: `Bearer ${token}` }
                 };
-                await axios.delete(`http://localhost:5000/api/movies/${id}`, config);
+                await axios.delete(`/api/movies/${id}`, config);
                 fetchMovies();
             } catch (err) {
                 console.error('Error deleting movie:', err);
@@ -464,7 +464,7 @@ const AdminMovies = () => {
                         movies.filter(m => m.status === 'running').map(movie => (
                             <div key={movie._id} className="group relative rounded-xl overflow-hidden shadow-lg bg-gray-900 aspect-[2/3]">
                                 <img
-                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                     alt={movie.title}
                                     className="w-full h-full object-cover group-hover:opacity-50 transition"
                                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -505,7 +505,7 @@ const AdminMovies = () => {
                         movies.filter(m => m.status === 'upcoming').map(movie => (
                             <div key={movie._id} className="group relative rounded-xl overflow-hidden shadow-lg bg-gray-900 aspect-[2/3]">
                                 <img
-                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster}
+                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
                                     alt={movie.title}
                                     className="w-full h-full object-cover group-hover:opacity-50 transition"
                                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

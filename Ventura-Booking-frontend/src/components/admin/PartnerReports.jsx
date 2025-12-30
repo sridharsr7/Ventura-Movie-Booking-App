@@ -30,7 +30,7 @@ const PartnerReports = () => {
 
     const fetchReports = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/admin/partner-reports', {
+            const res = await axios.get('/api/admin/partner-reports', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setReports(res.data);
@@ -43,7 +43,7 @@ const PartnerReports = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await axios.put(`http://localhost:5000/api/admin/partner-reports/${id}/status`,
+            await axios.put(`/api/admin/partner-reports/${id}/status`,
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -273,7 +273,7 @@ const PartnerReports = () => {
                                 {report.attachment && (
                                     <div className="mb-4">
                                         <a
-                                            href={`http://localhost:5000/${report.attachment}`}
+                                            href={`/${report.attachment}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 text-sm text-blue-600 hover:underline bg-blue-50 px-3 py-2 rounded-lg border border-blue-100"

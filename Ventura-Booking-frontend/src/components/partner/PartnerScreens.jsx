@@ -53,7 +53,7 @@ const PartnerScreens = () => {
     const fetchScreens = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get('http://localhost:5000/api/partner/screens', config);
+            const res = await axios.get('/api/partner/screens', config);
 
             const sortedScreens = res.data.map(screen => {
                 if (screen.showtimes && screen.showtimes.length > 0) {
@@ -78,7 +78,7 @@ const PartnerScreens = () => {
     const fetchMyMovies = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.get('http://localhost:5000/api/partner/my-movies', config);
+            const res = await axios.get('/api/partner/my-movies', config);
             setMyMovies(res.data);
         } catch (err) {
             console.error('Error fetching my movies:', err);
@@ -95,10 +95,10 @@ const PartnerScreens = () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
             if (editingScreenId) {
-                await axios.put(`http://localhost:5000/api/partner/screens/${editingScreenId}`, screenData, config);
+                await axios.put(`/api/partner/screens/${editingScreenId}`, screenData, config);
                 alert('Screen Updated Successfully');
             } else {
-                await axios.post('http://localhost:5000/api/partner/screens', screenData, config);
+                await axios.post('/api/partner/screens', screenData, config);
                 alert('Screen Added Successfully');
             }
 
@@ -131,7 +131,7 @@ const PartnerScreens = () => {
         if (window.confirm('Are you sure you want to delete this screen?')) {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                await axios.delete(`http://localhost:5000/api/partner/screens/${id}`, config);
+                await axios.delete(`/api/partner/screens/${id}`, config);
                 fetchScreens();
             } catch (err) {
                 console.error(err);
@@ -182,7 +182,7 @@ const PartnerScreens = () => {
             const gapSeatsCount = specialSeats.filter(s => s.status === 'gap').length;
             const newSeatCapacity = totalSlots - gapSeatsCount;
 
-            await axios.put(`http://localhost:5000/api/partner/screens/${managingScreen._id}`, {
+            await axios.put(`/api/partner/screens/${managingScreen._id}`, {
                 specialSeats: specialSeats,
                 rowPrices: rowPrices,
                 rowNames: rowNames,
@@ -230,10 +230,10 @@ const PartnerScreens = () => {
         try {
             const config = { headers: { Authorization: `Bearer ${token}` } };
             if (editingShowtimeId) {
-                await axios.put(`http://localhost:5000/api/partner/screens/${targetScreenId}/showtimes/${editingShowtimeId}`, showtimeData, config);
+                await axios.put(`/api/partner/screens/${targetScreenId}/showtimes/${editingShowtimeId}`, showtimeData, config);
                 alert('Showtime updated!');
             } else {
-                await axios.post(`http://localhost:5000/api/partner/screens/${targetScreenId}/showtimes`, showtimeData, config);
+                await axios.post(`/api/partner/screens/${targetScreenId}/showtimes`, showtimeData, config);
                 alert('Showtime added!');
             }
 
@@ -261,7 +261,7 @@ const PartnerScreens = () => {
         if (window.confirm('Delete this showtime?')) {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                await axios.delete(`http://localhost:5000/api/partner/screens/${screenId}/showtimes/${showtimeId}`, config);
+                await axios.delete(`/api/partner/screens/${screenId}/showtimes/${showtimeId}`, config);
                 fetchScreens();
             } catch (err) {
                 console.error(err);

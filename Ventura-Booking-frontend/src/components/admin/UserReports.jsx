@@ -25,7 +25,7 @@ const UserReports = () => {
 
     const fetchReports = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/admin/reports', {
+            const res = await axios.get('/api/admin/reports', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setReports(res.data);
@@ -38,7 +38,7 @@ const UserReports = () => {
 
     const handleStatusUpdate = async (id, newStatus) => {
         try {
-            await axios.put(`http://localhost:5000/api/admin/reports/${id}/status`,
+            await axios.put(`/api/admin/reports/${id}/status`,
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

@@ -56,7 +56,7 @@ const EditProfile = () => {
                 }
             };
 
-            const res = await axios.put('http://localhost:5000/api/auth/profile', formData, config);
+            const res = await axios.put('/api/auth/profile', formData, config);
             login(res.data.user, token);
             setMessage('Profile updated successfully!');
             setTimeout(() => {

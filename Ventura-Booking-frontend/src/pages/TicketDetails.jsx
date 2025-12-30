@@ -16,7 +16,7 @@ const TicketDetails = () => {
         const fetchBooking = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const res = await axios.get(`http://localhost:5000/api/bookings/${id}`, config);
+                const res = await axios.get(`/api/bookings/${id}`, config);
                 setBooking(res.data);
             } catch (err) {
                 console.error("Error fetching ticket:", err);
@@ -75,7 +75,7 @@ const TicketDetails = () => {
                     <div className="mt-8 flex flex-col md:flex-row gap-8 items-center md:items-start relative z-10">
                         <div className="w-32 h-48 rounded-lg overflow-hidden shadow-lg border border-white/20 flex-shrink-0">
                             <img
-                                src={booking.movie.poster && booking.movie.poster.startsWith('/uploads') ? `http://localhost:5000${booking.movie.poster}` : booking.movie.poster}
+                                src={booking.movie.poster && booking.movie.poster.startsWith('/uploads') ? `${booking.movie.poster}` : booking.movie.poster}
                                 alt={booking.movie.title}
                                 className="w-full h-full object-cover"
                             />

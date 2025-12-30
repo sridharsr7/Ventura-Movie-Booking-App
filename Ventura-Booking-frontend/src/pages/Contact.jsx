@@ -30,7 +30,7 @@ const Contact = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post('http://localhost:5000/api/contact', formData);
+            await axios.post('/api/contact', formData);
             alert("Thanks for contacting us! We'll get back to you shortly.");
             setFormData(prev => ({ ...prev, message: '' }));
         } catch (error) {

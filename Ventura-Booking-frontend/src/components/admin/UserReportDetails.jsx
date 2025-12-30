@@ -13,7 +13,7 @@ const UserReportDetails = () => {
     useEffect(() => {
         const fetchReportDetails = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/admin/reports/${id}`, {
+                const res = await axios.get(`/api/admin/reports/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setData(res.data);
@@ -29,7 +29,7 @@ const UserReportDetails = () => {
 
     const handleStatusUpdate = async (newStatus) => {
         try {
-            const res = await axios.put(`http://localhost:5000/api/admin/reports/${id}/status`,
+            const res = await axios.put(`/api/admin/reports/${id}/status`,
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

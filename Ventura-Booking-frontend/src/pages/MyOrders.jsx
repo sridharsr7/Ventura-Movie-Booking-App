@@ -21,7 +21,7 @@ const MyOrders = () => {
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-            const res = await axios.get('http://localhost:5000/api/bookings/user', config);
+            const res = await axios.get('/api/bookings/user', config);
             setOrders(res.data);
         } catch (err) {
             console.error("Error fetching orders:", err);
@@ -71,7 +71,7 @@ const MyOrders = () => {
                                     <div className="w-32 h-48 flex-shrink-0 rounded-lg overflow-hidden shadow-2xl border border-gray-700 mx-auto md:mx-0">
                                         {order.movie && (
                                             <img
-                                                src={order.movie.poster && order.movie.poster.startsWith('/uploads') ? `http://localhost:5000${order.movie.poster}` : order.movie.poster}
+                                                src={order.movie.poster && order.movie.poster.startsWith('/uploads') ? `${order.movie.poster}` : order.movie.poster}
                                                 alt={order.movie.title}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

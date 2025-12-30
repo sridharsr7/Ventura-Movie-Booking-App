@@ -28,7 +28,7 @@ const AdminStats = () => {
         localStorage.setItem('adminSelectedCity', selectedCity);
         const fetchStats = async () => {
             try {
-                let url = `http://localhost:5000/api/admin/stats?city=${selectedCity}&period=${period}`;
+                let url = `/api/admin/stats?city=${selectedCity}&period=${period}`;
                 if (period === 'custom') {
                     url += `&startDate=${customStart}&endDate=${customEnd}`;
                 }

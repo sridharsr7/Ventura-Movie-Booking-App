@@ -14,7 +14,7 @@ const PartnerReportDetails = () => {
     useEffect(() => {
         const fetchReportDetails = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/admin/partner-reports/${id}`, {
+                const res = await axios.get(`/api/admin/partner-reports/${id}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReport(res.data);
@@ -30,7 +30,7 @@ const PartnerReportDetails = () => {
 
     const handleStatusUpdate = async (newStatus) => {
         try {
-            const res = await axios.put(`http://localhost:5000/api/admin/partner-reports/${id}/status`,
+            const res = await axios.put(`/api/admin/partner-reports/${id}/status`,
                 { status: newStatus },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -140,7 +140,7 @@ const PartnerReportDetails = () => {
                                 <div className="mt-4">
                                     <label className="text-xs text-gray-500 uppercase tracking-wide mb-2 block">Attachment</label>
                                     <a
-                                        href={`http://localhost:5000/${report.attachment}`}
+                                        href={`/${report.attachment}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 bg-blue-50 px-4 py-3 rounded-lg border border-blue-100 hover:bg-blue-100 transition-colors w-full justify-center"

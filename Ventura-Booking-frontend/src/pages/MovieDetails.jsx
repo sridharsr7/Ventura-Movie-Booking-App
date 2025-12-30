@@ -30,7 +30,7 @@ const MovieDetails = () => {
     useEffect(() => {
         const fetchCities = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/movies/locations');
+                const res = await axios.get('/api/movies/locations');
                 setCities(res.data);
             } catch (err) {
                 console.error('Error fetching cities:', err);
@@ -46,7 +46,7 @@ const MovieDetails = () => {
                 try {
                     const token = localStorage.getItem('token');
                     const config = { headers: { Authorization: `Bearer ${token}` } };
-                    const res = await axios.get(`http://localhost:5000/api/movies/${id}/review-eligibility`, config);
+                    const res = await axios.get(`/api/movies/${id}/review-eligibility`, config);
                     setCanReview(res.data.canReview);
                     setHasReviewed(res.data.hasReviewed);
                     if (res.data.hasReviewed) {
@@ -70,7 +70,7 @@ const MovieDetails = () => {
         try {
             const token = localStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const res = await axios.post(`http://localhost:5000/api/movies/${id}/rate`, {
+            const res = await axios.post(`/api/movies/${id}/rate`, {
                 rating: tempRating,
                 comment: comment
             }, config);
@@ -96,10 +96,10 @@ const MovieDetails = () => {
     useEffect(() => {
         const fetchMovieData = async () => {
             try {
-                const movieRes = await axios.get(`http://localhost:5000/api/movies/${id}`);
+                const movieRes = await axios.get(`/api/movies/${id}`);
                 setMovie(movieRes.data);
 
-                const showtimeRes = await axios.get(`http://localhost:5000/api/movies/${id}/showtimes`);
+                const showtimeRes = await axios.get(`/api/movies/${id}/showtimes`);
                 setShowtimeData(showtimeRes.data);
             } catch (err) {
                 console.error("Error fetching movie details:", err);
@@ -146,7 +146,7 @@ const MovieDetails = () => {
     if (error) return <div className="h-screen w-full bg-[#0a0a0a] flex items-center justify-center text-red-500 font-mono text-xl">{error}</div>;
     if (!movie) return <div className="h-screen w-full bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xl">Movie Not Found</div>;
 
-    const posterUrl = movie.poster && movie.poster.startsWith('/uploads') ? `http://localhost:5000${movie.poster}` : movie.poster;
+    const posterUrl = movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster;
 
     const formatTime = (time) => {
         if (!time) return '';
@@ -382,7 +382,7 @@ const MovieDetails = () => {
                                     <div key={idx} className="flex-shrink-0 w-32 relative group cursor-pointer">
                                         <div className="aspect-[3/4] bg-[#111] overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 ease-out">
                                             <img
-                                                src={actor.photo.startsWith('/uploads') ? `http://localhost:5000${actor.photo}` : actor.photo}
+                                                src={actor.photo.startsWith('/uploads') ? `${actor.photo}` : actor.photo}
                                                 alt={actor.name}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.style.backgroundColor = '#222'; }}
