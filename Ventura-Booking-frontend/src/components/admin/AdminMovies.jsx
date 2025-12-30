@@ -464,7 +464,7 @@ const AdminMovies = () => {
                         movies.filter(m => m.status === 'running').map(movie => (
                             <div key={movie._id} className="group relative rounded-xl overflow-hidden shadow-lg bg-gray-900 aspect-[2/3]">
                                 <img
-                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                     alt={movie.title}
                                     className="w-full h-full object-cover group-hover:opacity-50 transition"
                                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -505,7 +505,7 @@ const AdminMovies = () => {
                         movies.filter(m => m.status === 'upcoming').map(movie => (
                             <div key={movie._id} className="group relative rounded-xl overflow-hidden shadow-lg bg-gray-900 aspect-[2/3]">
                                 <img
-                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                    src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                     alt={movie.title}
                                     className="w-full h-full object-cover group-hover:opacity-50 transition"
                                     onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

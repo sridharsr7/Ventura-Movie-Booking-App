@@ -80,7 +80,7 @@ const PartnerMovies = () => {
 
             {activeTab === 'marketplace' && (
                 <div className="space-y-8 animate-fade-in">
-                   
+
                     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                             <span className="material-symbols-outlined text-green-600">movie</span>
@@ -92,7 +92,7 @@ const PartnerMovies = () => {
                                     <div key={movie._id} className="relative rounded-xl overflow-hidden shadow-md bg-gray-50">
                                         <div className="aspect-[2/3] bg-gray-200">
                                             <img
-                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                                 alt={movie.title}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -126,7 +126,7 @@ const PartnerMovies = () => {
                         </div>
                     </div>
 
-                   
+
                     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
                         <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                             <span className="material-symbols-outlined text-blue-600">upcoming</span>
@@ -141,7 +141,7 @@ const PartnerMovies = () => {
                                         </div>
                                         <div className="aspect-[2/3] bg-gray-200">
                                             <img
-                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                                src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                                 alt={movie.title}
                                                 className="w-full h-full object-cover grayscale-[0.2]"
                                                 onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -175,7 +175,7 @@ const PartnerMovies = () => {
                                 <div key={movie._id} className="relative rounded-xl overflow-hidden shadow-md bg-gray-50">
                                     <div className="aspect-[2/3] bg-gray-200">
                                         <img
-                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                             alt={movie.title}
                                             className="w-full h-full object-cover"
                                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

@@ -143,7 +143,7 @@ const Home = () => {
                             >
                                 <div className="aspect-[2/3] w-full overflow-hidden rounded-xl">
                                     <img
-                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                         alt={movie.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}
@@ -189,7 +189,7 @@ const Home = () => {
                             >
                                 <div className="aspect-[2/3] w-full overflow-hidden rounded-xl">
                                     <img
-                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                        src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                         alt={movie.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                         onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/300x450?text=No+Poster'; }}

@@ -42,7 +42,7 @@ const Navbar = () => {
                 const filtered = allMovies.filter(movie =>
                     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
                 );
-                setSuggestions(filtered.slice(0, 5)); 
+                setSuggestions(filtered.slice(0, 5));
                 setShowSuggestions(true);
             } catch (err) {
                 console.error("Error fetching search suggestions:", err);
@@ -51,7 +51,7 @@ const Navbar = () => {
 
         const debounceTimer = setTimeout(() => {
             fetchSuggestions();
-        }, 300); 
+        }, 300);
 
         return () => clearTimeout(debounceTimer);
     }, [searchQuery, selectedCity]);
@@ -123,7 +123,7 @@ const Navbar = () => {
                                         className="flex items-center gap-3 px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors border-b border-gray-800 last:border-0"
                                     >
                                         <img
-                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster}
+                                            src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster}
                                             alt={movie.title}
                                             className="w-10 h-14 object-cover rounded-md"
                                             onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/40x56?text=No+Img'; }}

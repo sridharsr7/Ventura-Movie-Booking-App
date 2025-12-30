@@ -120,7 +120,7 @@ const AdminAnalytics = () => {
                                     <div className="space-y-3">
                                         {partner.approvedMovies.map(movie => (
                                             <div key={movie._id} className="flex items-center gap-3 bg-gray-50 p-2 rounded-lg border border-gray-100">
-                                                <img src={movie.poster} alt={movie.title} className="w-10 h-14 object-cover rounded" />
+                                                <img src={movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster} alt={movie.title} className="w-10 h-14 object-cover rounded" />
                                                 <div>
                                                     <p className="font-bold text-sm text-gray-800">{movie.title}</p>
                                                     <p className="text-xs text-gray-500">{movie.language}</p>
