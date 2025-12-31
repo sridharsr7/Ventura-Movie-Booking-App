@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, 
+    limits: { fileSize: 5 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const filetypes = /jpeg|jpg|png|pdf|doc|docx/;
         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -175,7 +175,7 @@ router.get('/analytics', protect, partner, async (req, res) => {
             }
 
             const screenId = b.screen.toString();
-            
+
             const amount = b.seats ? b.seats.reduce((s, seat) => s + (seat.price || 0), 0) : 0;
 
             dataMap[key].TotalRevenue += amount;
@@ -350,9 +350,11 @@ router.put('/screens/:id', protect, partner, async (req, res) => {
         }
         if (req.body.rowPrices) {
             screen.rowPrices = req.body.rowPrices;
+            screen.markModified('rowPrices');
         }
         if (req.body.rowNames) {
             screen.rowNames = req.body.rowNames;
+            screen.markModified('rowNames');
         }
 
         const updatedScreen = await screen.save();

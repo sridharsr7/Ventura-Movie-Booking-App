@@ -392,9 +392,11 @@ router.put('/screens/:id', protect, admin, async (req, res) => {
         }
         if (req.body.rowPrices) {
             screen.rowPrices = req.body.rowPrices;
+            screen.markModified('rowPrices');
         }
         if (req.body.rowNames) {
             screen.rowNames = req.body.rowNames;
+            screen.markModified('rowNames');
         }
 
         const updatedScreen = await screen.save();

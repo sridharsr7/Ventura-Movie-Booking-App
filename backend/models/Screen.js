@@ -17,14 +17,12 @@ const screenSchema = new mongoose.Schema({
 
 
     rowPrices: {
-        type: Map,
-        of: Number,
+        type: Object,
         default: {}
     },
 
     rowNames: {
-        type: Map,
-        of: String,
+        type: Object,
         default: {}
     },
 
