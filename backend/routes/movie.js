@@ -181,9 +181,9 @@ router.get('/:id/showtimes', async (req, res) => {
 
             for (let r = 0; r < screen.rows; r++) {
                 const rowLabel = getRowLabel(r);
-                const price = screen.rowPrices?.get(rowLabel) || 150;
+                const price = (screen.rowPrices && screen.rowPrices[rowLabel]) ? screen.rowPrices[rowLabel] : 150;
 
-                const name = screen.rowNames?.get(rowLabel) || '';
+                const name = (screen.rowNames && screen.rowNames[rowLabel]) ? screen.rowNames[rowLabel] : '';
 
 
                 const badSeats = screen.specialSeats ? screen.specialSeats.filter(s => s.row === r && (s.status === 'gap' || s.status === 'damaged')).length : 0;
@@ -410,7 +410,7 @@ router.post('/:id/rate', protect, async (req, res) => {
     try {
         const userId = req.user._id;
         const movieId = req.params.id;
-        let { rating, comment } = req.body; 
+        let { rating, comment } = req.body;
 
         // Validate rating
         if (!rating || rating < 1 || rating > 5) {
