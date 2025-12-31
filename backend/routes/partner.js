@@ -405,29 +405,41 @@ router.post('/screens/:id/showtimes', protect, partner, async (req, res) => {
 
 
         const newStart = getMinutes(time);
-        const newEnd = newStart + movie.duration + 20;
-
+        const newEnd = newStart + movie.duration + 20; // 20 min buffer for new show
 
         const newShowDate = new Date(date).toISOString().split('T')[0];
 
         const hasOverlap = screen.showtimes.some(show => {
             if (new Date(show.date).toISOString().split('T')[0] !== newShowDate) return false;
+
+            // If movie is missing (deleted?), we can't check duration-based overlap clearly. 
+            // Better to assume it occupies some time, or skip. Warning: this might allow collision with ghost shows.
+            // For now, if no movie, we skip as we can't calculate end time.
             if (!show.movie) return false;
 
             const existingStart = getMinutes(show.time);
-            const existingEnd = existingStart + show.movie.duration;
+            // Enforce buffer on existing show too
+            const existingEnd = existingStart + show.movie.duration + 20;
 
-            return Math.max(newStart, existingStart) < Math.min(newEnd, existingEnd);
+            // Strict overlap check:
+            // (StartA < EndB) and (EndA > StartB)
+            return (newStart < existingEnd) && (newEnd > existingStart);
         });
 
         if (hasOverlap) {
-            return res.status(400).json({ message: 'Showtime overlaps with an existing movie on this screen.' });
+            return res.status(400).json({ message: 'Showtime overlaps with an existing movie (including 20m buffer).' });
         }
 
         screen.showtimes.push({ movie: movieId, time, date });
         await screen.save();
 
-        const updatedScreen = await Screen.findById(screen._id).populate('movies').populate('showtimes.movie');
+        // Populate deep to ensure frontend receives correct data structure
+        const updatedScreen = await Screen.findById(screen._id)
+            .populate('movies')
+            .populate({
+                path: 'showtimes.movie',
+                model: 'Movie'
+            });
         res.json(updatedScreen);
     } catch (error) {
         console.error("Add/Edit Showtime Error:", error);
@@ -478,7 +490,7 @@ router.put('/screens/:id/showtimes/:showtimeId', protect, partner, async (req, r
 
 
         const newStart = getMinutes(targetTime);
-        const newEnd = newStart + movie.duration;
+        const newEnd = newStart + movie.duration + 20;
         const newShowDate = new Date(targetDate).toISOString().split('T')[0];
 
         const hasOverlap = screen.showtimes.some(show => {
@@ -487,13 +499,14 @@ router.put('/screens/:id/showtimes/:showtimeId', protect, partner, async (req, r
             if (!show.movie) return false;
 
             const existingStart = getMinutes(show.time);
-            const existingEnd = existingStart + show.movie.duration;
+            // Enforce buffer on existing
+            const existingEnd = existingStart + show.movie.duration + 20;
 
-            return Math.max(newStart, existingStart) < Math.min(newEnd, existingEnd);
+            return (newStart < existingEnd) && (newEnd > existingStart);
         });
 
         if (hasOverlap) {
-            return res.status(400).json({ message: 'Showtime overlaps with an existing movie on this screen.' });
+            return res.status(400).json({ message: 'Showtime overlaps with an existing movie (including 20m buffer).' });
         }
 
 
@@ -503,7 +516,12 @@ router.put('/screens/:id/showtimes/:showtimeId', protect, partner, async (req, r
 
         await screen.save();
 
-        const updatedScreen = await Screen.findById(screen._id).populate('movies').populate('showtimes.movie');
+        const updatedScreen = await Screen.findById(screen._id)
+            .populate('movies')
+            .populate({
+                path: 'showtimes.movie',
+                model: 'Movie'
+            });
         res.json(updatedScreen);
     } catch (error) {
         console.error("Add/Edit Showtime Error:", error);
