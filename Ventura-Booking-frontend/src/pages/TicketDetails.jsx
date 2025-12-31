@@ -41,7 +41,7 @@ const TicketDetails = () => {
         </div>
     );
 
-   
+
 
     const basePrice = booking.seats.reduce((sum, seat) => sum + (seat.price || 0), 0);
     const feesAndTax = booking.totalAmount - basePrice;
@@ -75,7 +75,7 @@ const TicketDetails = () => {
                     <div className="mt-8 flex flex-col md:flex-row gap-8 items-center md:items-start relative z-10">
                         <div className="w-32 h-48 rounded-lg overflow-hidden shadow-lg border border-white/20 flex-shrink-0">
                             <img
-                                src={booking.movie.poster && booking.movie.poster.startsWith('/uploads') ? `${booking.movie.poster}` : booking.movie.poster}
+                                src={booking.movie.poster && booking.movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${booking.movie.poster}` : booking.movie.poster}
                                 alt={booking.movie.title}
                                 className="w-full h-full object-cover"
                             />

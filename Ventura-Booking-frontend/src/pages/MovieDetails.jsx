@@ -76,7 +76,7 @@ const MovieDetails = () => {
             }, config);
 
             setHasReviewed(true);
-            setUserRating(tempRating * 2); 
+            setUserRating(tempRating * 2);
             setCanReview(false);
             setIsReviewing(false);
 
@@ -146,7 +146,7 @@ const MovieDetails = () => {
     if (error) return <div className="h-screen w-full bg-[#0a0a0a] flex items-center justify-center text-red-500 font-mono text-xl">{error}</div>;
     if (!movie) return <div className="h-screen w-full bg-[#0a0a0a] flex items-center justify-center text-white font-mono text-xl">Movie Not Found</div>;
 
-    const posterUrl = movie.poster && movie.poster.startsWith('/uploads') ? `${movie.poster}` : movie.poster;
+    const posterUrl = movie.poster && movie.poster.startsWith('/uploads') ? `${import.meta.env.VITE_API_BASE_URL}${movie.poster}` : movie.poster;
 
     const formatTime = (time) => {
         if (!time) return '';
